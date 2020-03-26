@@ -1,4 +1,5 @@
 import React from 'react';
+import config from './config';
 import {
   Animated,
   asset,
@@ -8,18 +9,37 @@ import {
   View,
   VrButton
 } from 'react-360';
-import { connect } from './store';
+import { connect, nextHmd } from './store';
 import styles from './stylesheet';
 
 const { AudioModule } = NativeModules;
 
 class CenterPanel extends React.Component {
   state = {
+    name: '',
+    image: '',
+    id: 1,
     hover: false,
     fade: new Animated.Value(0)
   };
 
+  fetchHmdData(index) {
+    fetch(`${config.API_ENDPOINT}/hmds`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      data.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+     this.setState({
+      name: data[index].name,
+      image: data[index].image,
+      id: data[index].id
+     });
+
+    });  
+  }
+
   componentDidMount() {
+    this.fetchHmdData(0);
 
     Animated.timing(
       this.state.fade,
@@ -30,11 +50,17 @@ class CenterPanel extends React.Component {
     ).start();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.index !== this.props.index) {
+      this.fetchHmdData(this.props.index);
+    }
+  }
   clickHandler(index) {
+    nextHmd(index)
 
     AudioModule.playOneShot({
-      source: asset('audio/click.wav'),
-      volume: 0.1
+      source: asset('audio/next.wav'),
+      volume: 0.4
     });
   }
   render () {
@@ -42,14 +68,17 @@ class CenterPanel extends React.Component {
     return(
       <Animated.View style={[{opacity: fade}, styles.centerPanel]}>
         <View style={styles.header}>
-          <Text style={styles.headerText}>Product Name</Text>
+    <Text style={styles.headerText}>{this.state.name}</Text>
         </View>
         <View>
-         <Image source={asset('img.png')}  style={{width:460, height: 250}}></Image>
+         <Image source={{uri: 'https://userdocsmanager.s3.us-east-2.amazonaws.com/'+this.state.image}}  style={{width:460, height: 250}}></Image>
         </View>
         <View>
-          <VrButton style={styles.buttonRate}>
-            <Text style={styles.textSize}>Next</Text>
+          <VrButton style={this.state.hover ? styles.hover : styles.button}
+                    onEnter={() => this.setState({hover: true})}
+                    onExit={() => this.setState({hover: false})}
+                    onClick={() => this.clickHandler(this.props.index)}>
+            <Text style={styles.textSize}>NEXT</Text>
           </VrButton>
         </View>
       </Animated.View>

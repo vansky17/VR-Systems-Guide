@@ -1,6 +1,7 @@
 import React from 'react';
 
 const State = {
+  hmd: 'BTC',
   index: 0
 };
 
@@ -12,14 +13,63 @@ function updateComponents() {
   }
 }
 
+export function nextHmd(index) {
+  let hmdIndex = index;
+  let hmds = [{ hmd: 'BTC',
+                   index: 0
+                 },
+                 {
+                   hmd: 'DASH',
+                   index: 1
+                 },
+                 { hmd: 'XMR',
+                   index: 2
+                 },
+                 { hmd: 'ZEN',
+                   index: 3
+                 },
+                 { hmd: 'DASH',
+                   index: 4
+                },
+                {  hmd: 'XMR',
+                   index: 5
+                },
+                {  hmd: 'ZEN',
+                   index: 6
+                },
+                {  hmd: 'BTC',
+                   index: 7
+                },
+                {  hmd: 'ZEN',
+                   index: 8
+                },
+                {  hmd: 'XMR',
+                   index: 9
+                }
+              ];
+
+
+  if (index < 8) {
+    hmdIndex = hmdIndex + 1;
+  } else {
+    hmdIndex = 0;
+  }
+
+  State.hmd = hmds[hmdIndex].hmd;
+  State.index = hmds[hmdIndex].index;
+  updateComponents();
+}
+
 export function connect(Component) {
   return class Wrapper extends React.Component {
     state = {
+      hmd: State.hmd,
       index: State.index
     };
 
     _listener = () => {
       this.setState({
+        hmd: State.hmd,
         index: State.index
       });
     };
@@ -32,6 +82,7 @@ export function connect(Component) {
       return (
         <Component
           {...this.props}
+          hmd={this.state.hmd}
           index={this.state.index}
         />
       );

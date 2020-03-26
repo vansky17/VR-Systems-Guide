@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     width: 300,
     height: 600,
     backgroundColor: '#00171F',
-    borderColor: 'darkgray',
+    borderColor: '#003459',
     borderWidth: 10,
     flexDirection: 'column',
     padding: 10,
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     width: 300,
     height: 600,
     backgroundColor: '#00171F',
-    borderColor: 'darkgray',
+    borderColor: '#003459',
     borderWidth: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     width: 500,
     height: 400,
     backgroundColor: '#00171F',
-    borderColor: 'darkgray',
+    borderColor: '#003459',
     borderWidth: 10,
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     /* opacity: 0.7, */
   },
   header: {
-    backgroundColor: 'darkgray',
+    backgroundColor: '#003459',
   },
   headerText: {
     fontSize: 40,
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   textSize: {
-    fontSize: 20,
+    fontSize: 19,
     textAlign: 'center'
   },
   infoHeader: {
@@ -53,16 +53,16 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#0EB1D2',
-    borderColor: 'darkgray',
+    borderColor: 'rgb(255,255,255)',
     borderWidth: 2.5
   },
   buttonRate: {
-    /* height: 60, */
+    height: 30,
     flexDirection: 'column',
     justifyContent: 'center',
-    /* backgroundColor: '#0EB1D2', */
-    borderColor: 'darkgray',
-    borderWidth: 1,
+    backgroundColor: '#0EB1D2',
+    borderColor: 'rgb(255,255,255)',
+    borderWidth: .5,
     marginBottom: 5
   },
   hover: {

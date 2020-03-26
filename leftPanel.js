@@ -1,24 +1,39 @@
 import React from 'react';
+import config from './config';
 import {
   asset,
   Animated,
   Text,
   View,
-  Image,
   staticResourceURL,
 } from 'react-360';
 import { connect } from './store';
 import styles from './stylesheet';
+import {VideoPlayer, VideoControl} from './src/VideoExtra'
 
 
 class LeftPanel extends React.Component {
   state = {
+    video: '',
+    page: '',
     fade: new Animated.Value(0)
   };
 
+  fetchHmdData(index) {
+    fetch(`${config.API_ENDPOINT}/hmds`)
+    .then(response => response.json())
+    .then(data => {
+      data.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+     this.setState({
+      video: data[index].video,
+      page: data[index].page
+     });
+    });
+    
+  }
 
   componentDidMount() {
-
+    this.fetchHmdData(0);
     Animated.timing(
       this.state.fade,
       {
@@ -28,17 +43,34 @@ class LeftPanel extends React.Component {
     ).start();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.index !== this.props.index) {
+      this.fetchHmdData(this.props.index);
+    }
+  }
+
   render() {
     let { fade } = this.state;
 
     return (
-        <View style={{flex: 1, height: 600, borderColor: 'darkgray',
+        <View style={{flex: 1, height: 600, borderColor: '#003459',
         borderWidth: 1}}>
           <View style={styles.header} style={{height: 125, backgroundColor: '#003459', opacity:0.5}}>
-            <Text style={styles.headerText}>Watch Video</Text>
+    <Text style={styles.headerText}>Watch Video</Text>
           </View>
-          <Image source={asset('youtube-play-bar.png')} style={{width:460, height: 250}}></Image>
+          <VideoPlayer 
+            muted={false}
+            loop={true}
+            source={{url:  this.state.video +'.mp4'}}
+            stereo={'2D'}
+            volume = {0.17}
+            style={{
+              width: 600,
+              height: 350,
+            }}
+          />
           <View style={styles.header} style={{height: 125, backgroundColor: '#003459', opacity:0.5}}>
+            <Text href={this.state.page}>{this.state.page}</Text>
             <Text style={styles.headerText} ></Text>
           </View>
       </View>

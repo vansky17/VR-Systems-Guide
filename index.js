@@ -13,7 +13,7 @@ import Entity from 'Entity';
 
 const AnimatedEntity = Animated.createAnimatedComponent(Entity);
 
-export class MainModel extends React.Component {
+export class CryptoModel extends React.Component {
   state = {
     rotation: new Animated.Value(0),
     bounceValue: new Animated.Value(0.5)
@@ -40,17 +40,54 @@ export class MainModel extends React.Component {
     )).start();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.hmd !== nextProps.hmd) {
+      const cryptoConfig = {
+        value: this.state.bounceValue,
+        initial: 0.3,
+        toValue: 0.5,
+        friction: 5
+      };
+
+      this.bounce(cryptoConfig);
+    }
+  }
+
+  rotations = {
+    BTC: {
+      rotateX: 0,
+      rotateY: this.state.rotation,
+      rotateZ: 0,
+    },
+    DASH: {
+      rotateX: 0,
+      rotateY: this.state.rotation,
+      rotateZ: 0,
+    },
+    XMR: {
+      rotateX: 0,
+      rotateY: this.state.rotation,
+      rotateZ: 0,
+    },
+    ZEN: {
+      rotateX: 0,
+      rotateY: this.state.rotation,
+      rotateZ: 0,
+    }
+  };
+
   render() {
     return (
       <View>
+  
       </View>
     );
   }
 };
 
-const ConnectedMainModel = connect(MainModel);
+const ConnectedCryptoModel = connect(CryptoModel);
 
 AppRegistry.registerComponent('ConnectedLeftPanel', () => ConnectedLeftPanel);
 AppRegistry.registerComponent('ConnectedRightPanel', () => ConnectedRightPanel);
 AppRegistry.registerComponent('ConnectedCenterPanel', () => ConnectedCenterPanel);
-AppRegistry.registerComponent('ConnectedMainModel', () => ConnectedMainModel);
+AppRegistry.registerComponent('ConnectedCryptoModel', () => ConnectedCryptoModel);

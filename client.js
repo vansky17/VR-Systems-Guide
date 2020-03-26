@@ -11,6 +11,10 @@ function init(bundle, parent, options = {}) {
   });
 
   // Render your app content to the default cylinder surface
+  r360.renderToLocation(
+    r360.createRoot('ConnectedCryptoModel', { /* initial props */ }),
+    new Location([0,-7,-17]),
+  );
 
   const leftPanel = new Surface(700, 600, Surface.SurfaceShape.Flat);
   leftPanel.setAngle(-0.9, 0);
