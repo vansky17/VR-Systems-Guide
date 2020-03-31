@@ -5,10 +5,10 @@ import {
   AppRegistry,
   View,
 } from 'react-360';
-import ConnectedRightPanel from './rightPanel';
-import ConnectedLeftPanel from './leftPanel';
-import ConnectedCenterPanel from './CenterPanel';
-import { connect } from './store';
+import ConnectedRightPanel from './src/components/RightPanel/rightPanel';
+import ConnectedLeftPanel from './src/components/LeftPanel/leftPanel';
+import ConnectedCenterPanel from './src/components/CenterPanel/CenterPanel';
+import { connect } from './src/components/store';
 import Entity from 'Entity';
 
 const AnimatedEntity = Animated.createAnimatedComponent(Entity);

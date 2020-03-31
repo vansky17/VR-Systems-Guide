@@ -1,5 +1,5 @@
 import React from 'react';
-import config from './config';
+import config from '../../../config';
 import {
   Animated,
   asset,
@@ -9,8 +9,8 @@ import {
   View,
   VrButton
 } from 'react-360';
-import { connect, nextHmd } from './store';
-import styles from './stylesheet';
+import { connect, nextHmd } from '../store';
+import styles from '../stylesheet';
 
 const { AudioModule } = NativeModules;
 

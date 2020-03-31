@@ -1,5 +1,5 @@
 import React from 'react';
-import config from './config';
+import config from '../../../config';
 import {
   asset,
   Animated,
@@ -7,9 +7,9 @@ import {
   View,
   staticResourceURL,
 } from 'react-360';
-import { connect } from './store';
-import styles from './stylesheet';
-import {VideoPlayer, VideoControl} from './src/VideoExtra'
+import { connect } from '../store';
+import styles from '../stylesheet';
+import {VideoPlayer, VideoControl} from '../../video/VideoExtra'
 
 
 class LeftPanel extends React.Component {
