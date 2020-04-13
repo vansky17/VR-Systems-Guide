@@ -79,7 +79,17 @@ export class CryptoModel extends React.Component {
   render() {
     return (
       <View>
-  
+         <AnimatedEntity
+          style={{transform: [{scaleX: this.state.bounceValue},
+                              {scaleY: this.state.bounceValue},
+                              {scaleZ: this.state.bounceValue},
+                              {rotateX: this.rotations[`${this.props.hmd}`].rotateX},
+                              {rotateY: this.rotations[`${this.props.hmd}`].rotateY},
+                              {rotateZ: this.rotations[`${this.props.hmd}`].rotateZ}
+                            ]}}
+          /* source={{obj: asset(`models/${this.props.hmd}.obj`), mtl: asset(`models/${this.props.hmd}.mtl`)}} */
+          source={{obj: asset(`models/BTC.obj`), mtl: asset(`models/BTC.mtl`)}}
+        />
       </View>
     );
   }
